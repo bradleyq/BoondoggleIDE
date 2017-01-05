@@ -16,6 +16,7 @@ class Speech2Text:
         self.Joe = True
         self.escapes = escapes
         ESCAPES = escapes
+        self.result = ''
 
 
     def process(self, autocorrect):

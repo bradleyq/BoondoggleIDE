@@ -111,7 +111,7 @@ class Application(Frame):
         self.recording = not self.recording
         if self.recording:
             print("Starting thread")
-            self.record_button['state'] = DISABLED
+            # self.record_button['state'] = DISABLED
             self.s2t.Joe = True
             self.record_thread = threading.Thread(target=self.record)
             self.record_thread.daemon = True
@@ -120,19 +120,21 @@ class Application(Frame):
 
     def record(self):
         """Records speech and turns it into the string self.s2t.raw_result"""
-        if self.recording:
+        # if self.recording:
+        while self.recording:
             try:
                 self.code = self.s2t.process(self.autocorrect)
                 if 'boondoggle' in self.s2t.result or self.code == '':
                     self.raw = ""
                 else:
                     self.raw = self.s2t.result
+                self.myprint()
             except MyException:
                 pass
-        self.recording = False
-        self.record_button['state'] = NORMAL
+        # self.recording = False
+        # self.record_button['state'] = NORMAL
         print("Ending thread")
-        self.myprint()
+        # self.myprint()
 
     def myprint(self):
         """Prints the most recent code and inserts it at the cursor."""
